@@ -371,19 +371,12 @@ const commands = [
 	new SlashCommandBuilder().setName('clear').setDescription('Staff Command | Clear messages').setDefaultMemberPermissions(2000).addNumberOption(option => option.setName('messages').setDescription('Enter the ammount messages that you wanna delete.')),
     new SlashCommandBuilder().setName('say').setDescription('Staff Command | Say').setDefaultMemberPermissions(2000),		
     new SlashCommandBuilder().setName('slowmode').setDescription('Staff Command | SlowMode').setDefaultMemberPermissions(2000).addNumberOption(option => option.setName('seconds').setDescription('How many seconds does the slowmode need').setRequired(true)),
-    new SlashCommandBuilder()
-    	.setName('giveaway')
-		.setDefaultMemberPermissions(2000)
-		.setDescription('Staff Command | Giveaway')
-		.addStringOption(option => option.setName('tijd').setDescription('Hoelang de giveaway moet duren').setRequired(true))
-		.addStringOption(option => option.setName('prijs').setDescription('Wat je kan winnen').setRequired(true))
-		.addIntegerOption(option => option.setName('winnaars').setDescription('Hoeveel mensen er kunnen winnen').setRequired(true)),		
 
 ]
     .map(command => command.toJSON());  
 
 const rest = new REST({ version: '9' }).setToken(token);
-rest.put(Routes.applicationGuildCommands("1029743266784092231", "1029743449848696884"), { body: commands })
+rest.put(Routes.applicationGuildCommands(`${clientId}`, `${guildId}`), { body: commands })
 	.then(() => console.log(`\u001b[1;34m[DEBUG]` + `\u001b[0m Successfully registered application commands.`))
     .catch(console.error);
 //##### REMOVE ALL COMMANDS #####
